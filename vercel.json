@@ -7,20 +7,6 @@
       "runtime": "nodejs18.x"
     }
   },
-  "crons": [
-    {
-      "path": "/api/cron/check-overdue-tickets",
-      "schedule": "*/15 * * * *"
-    },
-    {
-      "path": "/api/cron/check-inactive-technicians", 
-      "schedule": "*/30 * * * *"
-    },
-    {
-      "path": "/api/cron/check-low-stock",
-      "schedule": "0 */6 * * *"
-    }
-  ],
   "headers": [
     {
       "source": "/api/(.*)",
