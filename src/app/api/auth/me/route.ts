@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { executeQuerySingle } from '@/lib/db';
 import { withAuth, AuthenticatedRequest } from '@/lib/middleware';
-import { User } from '@/types';
+import { UserDB } from '@/types';
 
 export const GET = withAuth(async (request: AuthenticatedRequest) => {
   try {
@@ -13,7 +13,7 @@ export const GET = withAuth(async (request: AuthenticatedRequest) => {
     }
 
     // Obtener información completa del usuario
-    const user = await executeQuerySingle<User & { branch_name?: string }>(
+    const user = await executeQuerySingle<UserDB & { branch_name?: string }>(
       `SELECT u.*, b.name as branch_name 
        FROM users u 
        LEFT JOIN branches b ON u.branch_id = b.id 

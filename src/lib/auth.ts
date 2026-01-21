@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { User } from '@/types';
+import { User, UserDB } from '@/types';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'your-refresh-secret-key';
@@ -13,7 +13,7 @@ export interface JWTPayload {
   exp?: number;
 }
 
-export function generateTokens(user: User) {
+export function generateTokens(user: User | UserDB) {
   const payload: JWTPayload = {
     userId: user.id,
     email: user.email,

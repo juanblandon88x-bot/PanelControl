@@ -11,6 +11,20 @@ export interface User {
   updatedAt: Date;
 }
 
+// Database User type (matches database schema)
+export interface UserDB {
+  id: string;
+  email: string;
+  password_hash: string;
+  full_name: string;
+  role: 'OWNER' | 'ADMINISTRATOR' | 'EMPLOYEE';
+  branch_id?: string;
+  is_active: boolean;
+  last_access?: Date;
+  created_at: Date;
+  updated_at: Date;
+}
+
 export interface AuthTokens {
   accessToken: string;
   refreshToken: string;

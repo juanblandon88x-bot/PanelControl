@@ -29,7 +29,7 @@ const initialState: AlertState = {
 // Async thunks
 export const fetchAlerts = createAsyncThunk(
   'alerts/fetchAlerts',
-  async (filters?: AlertFilters, { rejectWithValue }) => {
+  async (filters: AlertFilters = {}, { rejectWithValue }) => {
     try {
       const response = await axios.get<ApiResponse<Alert[]>>('/api/alerts', {
         params: filters,

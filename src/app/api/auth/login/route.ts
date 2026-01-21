@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { executeQuerySingle } from '@/lib/db';
 import { comparePassword, generateTokens } from '@/lib/auth';
-import { User } from '@/types';
+import { UserDB } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 
 const loginSchema = z.object({
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     const { email, password } = loginSchema.parse(body);
 
     // Buscar usuario por email
-    const user = await executeQuerySingle<User>(
+    const user = await executeQuerySingle<UserDB>(
       'SELECT * FROM users WHERE email = ? AND is_active = TRUE',
       [email]
     );

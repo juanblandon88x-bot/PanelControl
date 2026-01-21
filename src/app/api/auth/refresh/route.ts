@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { executeQuerySingle } from '@/lib/db';
 import { verifyRefreshToken, generateTokens } from '@/lib/auth';
-import { User } from '@/types';
+import { UserDB } from '@/types';
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Obtener usuario actualizado
-    const user = await executeQuerySingle<User>(
+    const user = await executeQuerySingle<UserDB>(
       'SELECT * FROM users WHERE id = ? AND is_active = TRUE',
       [payload.userId]
     );

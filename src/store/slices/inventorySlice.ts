@@ -29,7 +29,7 @@ const initialState: InventoryState = {
 // Async thunks
 export const fetchInventory = createAsyncThunk(
   'inventory/fetchInventory',
-  async (filters?: InventoryFilters, { rejectWithValue }) => {
+  async (filters: InventoryFilters = {}, { rejectWithValue }) => {
     try {
       const response = await axios.get<ApiResponse<Equipment[]>>('/api/inventory', {
         params: filters,

@@ -4,13 +4,18 @@ let connection: mysql.Connection | null = null;
 
 export async function getConnection() {
   if (!connection) {
-    connection = await mysql.createConnection({
+    const config: mysql.ConnectionOptions = {
       host: process.env.DB_HOST || 'localhost',
       user: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_NAME || 'ticket_management',
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
-    });
+    };
+
+    if (process.env.NODE_ENV === 'production') {
+      config.ssl = { rejectUnauthorized: false };
+    }
+
+    connection = await mysql.createConnection(config);
   }
   return connection;
 }
